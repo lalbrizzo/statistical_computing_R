@@ -1,9 +1,13 @@
+###########################################################
+##########   ANOVA & POST-HOC TEST   ######################
+###########################################################
+
 library(palmerpenguins)
 library(tidyverse)
 library(ggplot2)
 library(dplyr)
-#library(car)
 
+#select subset of penguis dataframe for more clarity
 dat <- penguins %>%
   select(species, flipper_length_mm)
 
@@ -16,24 +20,15 @@ ggplot(dat) +
   geom_jitter() +
   theme(legend.position = "none")
 
-#testing normality (even if samples are big enough)
 
+#testing normality (even if samples are big enough)
 #computing ANOVA to check if residuals are normally distributed
 res_aov <- aov(flipper_length_mm ~ species,
                data = dat
 )
 
-
-#par(mfrow = c(1, 2)) # combine plots
-
 # histogram
 hist(res_aov$residuals)
-
-
-# QQ-plot
-#qqPlot(res_aov$residuals,
-#       id = FALSE # id = FALSE to remove point identification
-#)
 
 #boxplot allow to see that averages among groups are different
 #and visually check that there are no outliers
@@ -78,9 +73,9 @@ res_aov <- aov(flipper_length_mm ~ species,
 # groups are sign. different since p is very small
 summary(res_aov)
 
-##########################################################
-### POST-HOC TESTS##########
-########################
+###########################################################
+##################   POST-HOC TESTS #######################
+###########################################################
 
 
 # We just proved that the 3 groups are different, we still do not know
@@ -89,9 +84,8 @@ summary(res_aov)
 # due to chance gets quickly high even with just 3 groups.
 
 #Some other analysis must be performed, sometimes called post-hoc 
-#analysis (maybe not in slides)
+#analysis 
 
-#Discuss quickly about Bonferroni correction in slides
 
 #performing Turkey test to correct p-values 
 Turkey_test <- TukeyHSD(res_aov)

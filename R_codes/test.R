@@ -13,5 +13,3 @@ boxplot(x, main = "Bottom left")             # Bottom left
 plot(x, main = "Top right")                  # Top right
 pie(table(round(x)), main = "Bottom right")  # Bottom right
 
-# Back to the original graphics device
-par(mfcol = c(1, 1))

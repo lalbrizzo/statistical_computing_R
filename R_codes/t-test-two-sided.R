@@ -1,3 +1,7 @@
+###########################################################
+##############  TWO SAMPLES T TEST   ######################
+###########################################################
+
 library(palmerpenguins) #data 
 library(ggplot2) #plotting 
 library(BSDA) #statistical tests 
@@ -49,10 +53,9 @@ test_ad_gentoo <- t.test(body_mass_g ~ species,
                var.equal = FALSE,
                alternative = "less"
 )
-
+#print on screen p values for the two test 
 cat('p value adelie chinstrap = ', test_ad_chin$p.value)
 cat('p value adelie gentoo = ', test_ad_gentoo$p.value)
 
+#boxplots to compare species on different islands 
 ad_chin + ad_gentoo
-
-test_ad_chin

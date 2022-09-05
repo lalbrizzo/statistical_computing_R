@@ -1,3 +1,7 @@
+###########################################################
+##############  ONE SAMPLE Z TEST   #######################
+###########################################################
+
 library(palmerpenguins) #data 
 library(ggplot2) #plotting
 library(dplyr) # operators
@@ -21,20 +25,12 @@ test <- prop.test(
 )
 
 # we do not reject the null hypothesis 
-test
+print(test)
 
-summary(penguins)
-
+#filter penguins using the %in% operator
 dat_sex<- penguins %>%
   select(species, sex) %>%
   filter((sex %in% c('female','male'))  )
-
-summary(dat_sex)
-
-
-
-
-
 
 test_sex <- prop.test(
   x = 165, # number of successes (female)
@@ -44,21 +40,12 @@ test_sex <- prop.test(
 )
 
 # we do not reject the null hypothesis 
-test_sex
+print(test_sex)
 
 
-species_prop <- ggplot(dat_Biscoe) +
-  aes(x = species) +
-  geom_bar(fill = "#0c4c8a") +
-  theme_minimal() +
-  labs(title = "p=0.0")
-
+#Plot for sex proportion
 sex_prop <- ggplot(dat_sex) +
   aes(x = sex) +
   geom_bar(fill = "#8B0000") +
   theme_minimal() +
   labs(title = "Biscoe island")
-
-
-#sex_prop + species_prop & scale_y_continuous(limits = c(0, 170))
-sex_prop
